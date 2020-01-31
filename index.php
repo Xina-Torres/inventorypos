@@ -4,6 +4,17 @@ include_once'connectdb.php';
 if(isset($_POST['btn_login'])){
     $useremail = $_POST['txt_email'];
     $password = $_POST['txt_password'];
+//    echo $useremail."-".$password;
+    $select=$pdo->prepare("select * from tbl_user where useremail='$useremail' AND password='$password'");
+    $select->execute();
+    $row=$select->fetch(PDO::FETCH_ASSOC);
+//    echo ($row['useremail']);
+    if($row['useremail']==$useremail AND $row['password']==$password){
+        echo $success='Login Successful.';
+        header('refresh:1;dashboard.php');
+    }else{
+        echo 'Login failed.';
+    }
 }
 ?>
 <!DOCTYPE html>
