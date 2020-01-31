@@ -9,9 +9,12 @@ if(isset($_POST['btn_login'])){
     $select->execute();
     $row=$select->fetch(PDO::FETCH_ASSOC);
 //    echo ($row['useremail']);
-    if($row['useremail']==$useremail AND $row['password']==$password){
-        echo $success='Login Successful.';
+    if($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="Admin"){
+        echo $success='Login Admin Successful.';
         header('refresh:1;dashboard.php');
+    } elseif($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="User"){
+        echo $success='Login User Successful.';
+        header('refresh:1;user.php');
     }else{
         echo 'Login failed.';
     }

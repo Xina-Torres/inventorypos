@@ -22,9 +22,7 @@
         | Your Page Content Here |
         -------------------------->
 
-    </section><?php
-        include_once 'header.php';
-      ?>
+    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

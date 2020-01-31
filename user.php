@@ -1,12 +1,12 @@
 <?php
-    include_once 'header.php';
+    include_once 'headeruser.php';
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Admin Dashboard
+        User Dashboard
      <!--   <small>Optional description</small>-->
       </h1>
       <ol class="breadcrumb">
@@ -23,11 +23,6 @@
         -------------------------->
 
     </section>
-<!--
-           <?php
-            include_once 'header.php';
-          ?>
--->
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

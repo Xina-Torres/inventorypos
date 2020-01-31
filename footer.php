@@ -10,9 +10,10 @@
 
       <!-- /.tab-pane -->
       <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+<!--      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>-->
       <!-- /.tab-pane -->
       <!-- Settings tab content -->
+<!--
       <div class="tab-pane" id="control-sidebar-settings-tab">
         <form method="post">
           <h3 class="control-sidebar-heading">General Settings</h3>
@@ -27,9 +28,10 @@
               Some information about this general settings option
             </p>
           </div>
-          <!-- /.form-group -->
+          // /.form-group 
         </form>
       </div>
+-->
       <!-- /.tab-pane -->
     </div>
   </aside>
