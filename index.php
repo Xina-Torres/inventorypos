@@ -10,6 +10,10 @@ if(isset($_POST['btn_login'])){
     $row=$select->fetch(PDO::FETCH_ASSOC);
 //    echo ($row['useremail']);
     if($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="Admin"){
+        $_SESSION['userid']=$row['userid'];
+        $_SESSION['username']=$row['username'];
+        $_SESSION['useremail']=$row['useremail'];
+        $_SESSION['role']=$row['role'];
         echo $success='Login Admin Successful.';
         header('refresh:1;dashboard.php');
     } elseif($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="User"){
