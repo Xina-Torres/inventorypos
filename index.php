@@ -17,6 +17,10 @@ if(isset($_POST['btn_login'])){
         echo $success='Login Admin Successful.';
         header('refresh:1;dashboard.php');
     } elseif($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="User"){
+        $_SESSION['userid']=$row['userid'];
+        $_SESSION['username']=$row['username'];
+        $_SESSION['useremail']=$row['useremail'];
+        $_SESSION['role']=$row['role'];
         echo $success='Login User Successful.';
         header('refresh:1;user.php');
     }else{

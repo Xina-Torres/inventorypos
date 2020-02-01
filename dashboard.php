@@ -5,7 +5,7 @@
     if($_SESSION['useremail']==""){
         header('location:index.php');
     }
-include_once 'header.php';
+    include_once 'header.php';
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
