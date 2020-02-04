@@ -56,7 +56,36 @@
                 </div>
 
               </div>
-               <div class="col-md-8"><h2></h2></div>
+               <div class="col-md-8">
+                   <table class="table table-striped">
+                       <thead>
+                       <tr>
+                        <th>#</th>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                        <th>PASSWORD</th>
+                        <th>ROLE</th>
+                        </tr>
+                       </thead>
+                       <tbody>
+                           <?php  
+                           $select=$pdo->prepare("select * from tbl_user order by userid desc");
+                           $select->execute();
+                           
+                           while($row=$select->fetch(PDO::FETCH_OBJ)){
+                               echo'
+                               <tr>
+                               <td>'.$row->userid.'</td>
+                               <td>'.$row->username.'</td>
+                               <td>'.$row->useremail.'</td>
+                               <td>'.$row->password.'</td>
+                               <td>'.$row->role.'</td>
+                               </tr>';
+                           }
+                           ?>
+                       </tbody>
+                   </table>
+               </div>
 
               </div>
               <!-- /.box-body -->
