@@ -2,6 +2,26 @@
     include_once 'connectdb.php';
     session_start();
     include_once 'header.php';
+
+    if(isset($_POST['btnsave'])){
+        $username=$_POST['txtname'];
+        $useremail=$_POST['txtemail'];
+        $password=$_POST['txtpassword'];
+        $userrole=$_POST['txtselect_option'];
+//        echo $username."==".$useremail."==".$password."==".$userrole;
+        $insert=$pdo->prepare("insert into tbl_user(username, useremail, password, role)values(:name,:email,:pass,:role)");
+        
+        $insert->bindParam(':name',$username);
+        $insert->bindParam(':email',$useremail);
+        $insert->bindParam(':pass',$password);
+        $insert->bindParam(':role',$userrole);
+        
+        if($insert->execute()){
+            echo 'Registration successful';
+        }else{
+            echo 'Registration failed.';
+        }
+    }
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -56,6 +76,7 @@
                     
                   </select>
                 </div>
+                <button type="submit" name="btnsave" class="btn btn-info">Save</button>
 
               </div>
                <div class="col-md-8">
@@ -94,7 +115,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-info">Save</button>
+                
               </div>
             </form>
           </div>
