@@ -9,90 +9,127 @@
         $password=$_POST['txtpassword'];
         $userrole=$_POST['txtselect_option'];
 //        echo $username."==".$useremail."==".$password."==".$userrole;
-        $insert=$pdo->prepare("insert into tbl_user(username, useremail, password, role)values(:name,:email,:pass,:role)");
         
-        $insert->bindParam(':name',$username);
-        $insert->bindParam(':email',$useremail);
-        $insert->bindParam(':pass',$password);
-        $insert->bindParam(':role',$userrole);
+        if(isset($_POST['txtemail'])){
+            $select=$pdo->prepare("select useremail from tbl_user where useremail='$useremail'");
+            $select->execute();
+            
+            if($select->rowCount()>0){
+                echo '<script type="text/javascript">
+                jQuery(function validation(){
+                    swal({
+                        title: "Warning",
+                        text: "Email already exists",
+                        icon: "warning",
+                        button: "Ok",
+});
+        });
+            </script>';
+            }else{
+                $insert=$pdo->prepare("insert into tbl_user(username, useremail, password, role)values(:name,:email,:pass,:role)");
+                $insert->bindParam(':name',$username);
+                $insert->bindParam(':email',$useremail);
+                $insert->bindParam(':pass',$password);
+                $insert->bindParam(':role',$userrole);
         
         if($insert->execute()){
-            echo 'Registration successful';
+            echo '<script type="text/javascript">
+                jQuery(function validation(){
+                    swal({
+                        title: "Good Job!",
+                        text: "Your registration was successful!",
+                        icon: "success",
+                        button: "Ok",
+});
+        });
+            </script>';
         }else{
-            echo 'Registration failed.';
+            echo '<script type="text/javascript">
+                jQuery(function validation(){
+                    swal({
+                        title: "Error!",
+                        text: "Registration Failed!",
+                        icon: "error",
+                        button: "Ok",
+});
+        });
+            </script>';
         }
+            }
+        }//end if txtemail
+
     }
 ?>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Registration
-     <!--   <small>Optional description</small>-->
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
+        <h1>
+            Registration
+            <!--   <small>Optional description</small>-->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+            <li class="active">Here</li>
+        </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
+        <!--------------------------
         | Your Page Content Here |
         -------------------------->
-          <!-- general form elements -->
-          <div class="box box-info">
+        <!-- general form elements -->
+        <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Registration Form</h3>
+                <h3 class="box-title">Registration Form</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" action="" method="post">
-              <div class="box-body">
-              <div class="col-md-4">
-              
-                <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" class="form-control" name="txtname" placeholder="Enter Name">
-                </div>
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" class="form-control" name="txtemail" placeholder="Enter Email">
-                </div>
-                
-                             <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" class="form-control" name="txtpassword" placeholder="Enter Password">
-                </div>
-                  <div class="form-group">
-                  <label>Role</label>
-                  <select class="form-control" name="txtselect_option">
-                   <option value="" disabled selected>Select Role</option>
-                    <option>User</option>
-                    <option>Admin</option>
-                    
-                  </select>
-                </div>
-                <button type="submit" name="btnsave" class="btn btn-info">Save</button>
+                <div class="box-body">
+                    <div class="col-md-4">
 
-              </div>
-               <div class="col-md-8">
-                   <table class="table table-striped">
-                       <thead>
-                       <tr>
-                        <th>#</th>
-                        <th>NAME</th>
-                        <th>EMAIL</th>
-                        <th>PASSWORD</th>
-                        <th>ROLE</th>
-                         <th>DELETE</th>
-                        </tr>
-                       </thead>
-                       <tbody>
-                           <?php  
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="txtname" placeholder="Enter Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="txtemail" placeholder="Enter Email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="txtpassword" placeholder="Enter Password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control" name="txtselect_option" required>
+                                <option value="" disabled selected>Select Role</option>
+                                <option>User</option>
+                                <option>Admin</option>
+
+                            </select>
+                        </div>
+                        <button type="submit" name="btnsave" class="btn btn-info">Save</button>
+
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>NAME</th>
+                                    <th>EMAIL</th>
+                                    <th>PASSWORD</th>
+                                    <th>ROLE</th>
+                                    <th>DELETE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php  
                            $select=$pdo->prepare("select * from tbl_user order by userid desc");
                            $select->execute();
                            
@@ -107,24 +144,23 @@
                                </tr>';
                            }
                            ?>
-                       </tbody>
-                   </table>
-               </div>
+                            </tbody>
+                        </table>
+                    </div>
 
-              </div>
-              <!-- /.box-body -->
+                </div>
+                <!-- /.box-body -->
 
-              <div class="box-footer">
-                
-              </div>
+                <div class="box-footer">
+
+                </div>
             </form>
-          </div>
+        </div>
 
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+</div>
+<!-- /.content-wrapper -->
 <?php
    include_once 'footer.php';
 ?>
- 
