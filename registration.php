@@ -2,7 +2,21 @@
     include_once 'connectdb.php';
     session_start();
     include_once 'header.php';
-
+    $id=$_GET['id'];
+error_reporting(0);
+    $delete=$pdo->prepare("delete from tbl_user where userid=".$id);
+    if($delete->execute()){
+          echo '<script type="text/javascript">
+                jQuery(function validation(){
+                    swal({
+                        title: "Good Job!",
+                        text: "Account Deleted!",
+                        icon: "success",
+                        button: "Ok",
+});
+        });
+            </script>';
+    }
     if(isset($_POST['btnsave'])){
         $username=$_POST['txtname'];
         $useremail=$_POST['txtemail'];
@@ -141,6 +155,9 @@
                                <td>'.$row->useremail.'</td>
                                <td>'.$row->password.'</td>
                                <td>'.$row->role.'</td>
+                               <td>
+                               <a href="registration.php?id='.$row->userid.'" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash" title="delete"></span></a>
+                               </td>
                                </tr>';
                            }
                            ?>
