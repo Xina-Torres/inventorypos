@@ -26,8 +26,8 @@ if(isset($_POST['btnsave'])){
             echo '<script type="text/javascript">
                 jQuery(function validation(){
                     swal({
-                        title: "Good Job!",
-                        text: "Your Category is Updated.",
+                        title: "Added!",
+                        text: "Your Category is Added.",
                         icon: "success",
                         button: "Ok",
 });
@@ -64,14 +64,14 @@ if(isset($_POST['btnupdate'])){
         echo $errorupdate;
     }//btn update
     if(isset($errorupdate)){
-        $update=$pdo->prepare("update tbl_category set category='$category' where catid=".$id);
+        $update=$pdo->prepare("update tbl_category set category=:category where catid=".$id);
         $update->bindParam(':category',$category);
         if($update->execute()){
             echo 
             '<script type="text/javascript">
                 jQuery(function validation(){
                     swal({
-                        title: "Good Job!",
+                        title: "Updated!",
                         text: "Your Category is Updated",
                         icon: "success",
                         button: "Ok",
@@ -93,7 +93,37 @@ if(isset($_POST['btnupdate'])){
         }
     }
     
+}//btnupdate end
+
+if(isset($_POST['btndelete'])){
+    $delete=$pdo->prepare("delete from tbl_category where catid=".$_POST['btndelete']);
+    if($delete->execute()){
+        echo  '<script type="text/javascript">
+                jQuery(function validation(){
+                    swal({
+                        title: "Updated!",
+                        text: "Your Category is Deleted",
+                        icon: "success",
+                        button: "Ok",
+});
+        });
+            </script>';
+    }else{
+        echo  '<script type="text/javascript">
+                jQuery(function validation(){
+                    swal({
+                        title: "Erro!",
+                        text: "Your Category is Not Updated",
+                        icon: "error",
+                        button: "Ok",
+});
+        });
+            </script>';
+    }
+    
 }
+
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
