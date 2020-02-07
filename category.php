@@ -74,9 +74,30 @@ if(isset($_POST['btnsave'])){
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="" method="post">
-                <div class="box-body">
-                    <div class="col-md-4">
+
+            <div class="box-body">
+                <form role="form" action="" method="post">
+                    <?php
+                    if(isset($_POST['btnedit'])){
+                        $select=$pdo->prepare("select * from tbl_category where catid=".$_POST['btnedit']);
+                        $select->execute();
+                        
+                        if($select){
+                            $row=$select->fetch(PDO::FETCH_OBJ);
+                           echo '   <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label>Category</label>
+                            
+                            <input type="hidden" class="form-control" name="txtid" value="'.$row->catid.'"  placeholder="Enter Category">
+                            <input type="text" class="form-control" name="txtcategory" value="'.$row->category.'"  placeholder="Enter Category">
+                        </div>
+                        <button type="submit" name="btnsave" class="btn btn-info" name="btnupdate">Update</button>
+
+                    </div>';  
+                        }
+                    }else{
+                        echo '   <div class="col-md-4">
 
                         <div class="form-group">
                             <label>Category</label>
@@ -84,7 +105,10 @@ if(isset($_POST['btnsave'])){
                         </div>
                         <button type="submit" name="btnsave" class="btn btn-warning">Save</button>
 
-                    </div>
+                    </div>';
+                    }
+                    ?>
+
                     <div class="col-md-8">
                         <table class="table table-striped">
                             <thead>
@@ -120,14 +144,14 @@ if(isset($_POST['btnsave'])){
                             </tbody>
                         </table>
                     </div>
+                </form>
+            </div>
+            <!-- /.box-body -->
 
-                </div>
-                <!-- /.box-body -->
+            <div class="box-footer">
 
-                <div class="box-footer">
+            </div>
 
-                </div>
-            </form>
         </div>
     </section>
     <!-- /.content -->
