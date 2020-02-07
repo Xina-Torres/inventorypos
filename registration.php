@@ -5,8 +5,9 @@
         header('location:index.php');
     }
     include_once 'header.php';
-    $id=$_GET['id'];
 error_reporting(0);
+    $id=$_GET['id'];
+
     $delete=$pdo->prepare("delete from tbl_user where userid=".$id);
     if($delete->execute()){
           echo '<script type="text/javascript">
