@@ -187,7 +187,7 @@ if(isset($_POST['btndelete'])){
                     ?>
 
                     <div class="col-md-8">
-                        <table class="table table-striped">
+                        <table id="tablecategory" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -234,6 +234,13 @@ if(isset($_POST['btndelete'])){
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<!--Call this single function -->
+<script>
+    $(document).ready(function() {
+        $('#tablecategory').DataTable();
+    });
+
+</script>
 <?php
    include_once 'footer.php';
 ?>
