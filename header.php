@@ -210,7 +210,7 @@ desired effect
 
                     <li><a href="category.php"><i class="fa fa-list-alt"></i> <span>Category</span></a></li>
 
-                    <li><a href="addproduct.php"><i class="fa fa-product-hunt"></i> <span>Add Product</span></a></li>
+                    <li><a href="productadd.php"><i class="fa fa-product-hunt"></i> <span>Add Product</span></a></li>
 
                     <li><a href="productlist.php"><i class="fa fa-th-list"></i> <span>Productlist</span></a></li>
 
