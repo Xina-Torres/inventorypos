@@ -214,7 +214,7 @@ desired effect
 
                     <li><a href="productlist.php"><i class="fa fa-th-list"></i> <span>Productlist</span></a></li>
 
-                    <li><a href="createorder.php"><i class="fa fa-first-order"></i> <span>Createorder</span></a></li>
+                    <li><a href="ordercreate.php"><i class="fa fa-first-order"></i> <span>Createorder</span></a></li>
 
                     <li><a href="orderlist.php"><i class="fa fa-list-ul"></i> <span>Orderlist</span></a></li>
 
