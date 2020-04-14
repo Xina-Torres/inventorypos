@@ -1,23 +1,16 @@
 <?php
-
-
 //call the FPDF library
+
 require('fpdf/fpdf.php');
+include_once'connectdb.php';
+$id=$_GET['id'];
+$select=$pdo->prepare("select * from tbl_invoice where invoice_id=$id");
+$select->execute();
+$row=$select->fetch(PDO::FETCH_OBJ);
 
-
-//A4 width : 219mm
-//default margin : 10mm each side
-//writable horizontal : 219-(10*2)=199mm
 
 //create pdf object
 $pdf = new FPDF('P','mm','A4');
-//String orientation (P or L) — portrait or landscape 
-//String unit (pt,mm,cm and in) — measure unit
-//Mixed format (A3, A4, A5, Letter and Legal) — format of pages
-
-
-
-
 
 
 //add new page
@@ -39,19 +32,19 @@ $pdf->Cell(80,5,'Address : #99 Bisig II, Sandico St., Abangan Sur, Marilao, Bula
 
 
 $pdf->SetFont('Arial','',10);
-$pdf->Cell(112,5,'Invoice : #12345',0,1,'C');
+$pdf->Cell(112,5,'Invoice :'.$row->invoice_id,0,1,'C');
 
 $pdf->SetFont('Arial','',8);
 $pdf->Cell(80,5,'Phone Number: 347-4567-2314',0,0,'');
 
 
 $pdf->SetFont('Arial','',10);
-$pdf->Cell(112,5,'Date : 28-12-2020',0,1,'C');
+$pdf->Cell(112,5,'Date : '.$row->order_date,0,1,'C');
 
 
 $pdf->SetFont('Arial','',8);
-$pdf->Cell(80,5,'E-mail Address : xina.torres.com',0,1,'');
-//$pdf->Cell(80,5,'Website : www.jedenenterprises.com,0,1,'');
+$pdf->Cell(80,5,'E-mail Address : xina.torres@gmail.com',0,1,'');
+//$pdf->Cell(80,5,'Website : www.cybarg.com',0,1,'');
 
 //Line(x1,y1,x2,y2);
 
@@ -66,7 +59,7 @@ $pdf->Cell(20,10,'Bill To :',0,0,'');
 
 
 $pdf->SetFont('Courier','BI',14);
-$pdf->Cell(50,10,'Faizan Khan',0,1,'');
+$pdf->Cell(50,10,$row->customer_name,0,1,'');
 
 $pdf->Cell(50,5,'',0,1,'');
 
@@ -80,87 +73,64 @@ $pdf->Cell(30,8,'PRICE',1,0,'C',true);
 $pdf->Cell(40,8,'TOTAL',1,1,'C',true);
 
 
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(100,8,'Iphone',1,0,'L');   //190
-$pdf->Cell(20,8,'1',1,0,'C');
-$pdf->Cell(30,8,'800',1,0,'C');
-$pdf->Cell(40,8,'800',1,1,'C');
+$select=$pdo->prepare("select * from tbl_invoice_details where invoice_id=$id");
+$select->execute();
 
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(100,8,'Redmi Note',1,0,'L');   //190
-$pdf->Cell(20,8,'1',1,0,'C');
-$pdf->Cell(30,8,'600',1,0,'C');
-$pdf->Cell(40,8,'600',1,1,'C');
+while($item=$select->fetch(PDO::FETCH_OBJ)){
+  $pdf->SetFont('Arial','B',12);
+$pdf->Cell(100,8,$item->product_name,1,0,'R');   
+$pdf->Cell(20,8,$item->qty,1,0,'C');
+$pdf->Cell(30,8,'PHP '.number_format($item->price, 2, '.', ''),1,0,'R');
+$pdf->Cell(40,8,'PHP '.number_format($item->price*$item->qty, 2, '.', ''),1,1,'R');  
+    
+}
 
 
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(100,8,'Hard Disk',1,0,'L');   //190
-$pdf->Cell(20,8,'2',1,0,'C');
-$pdf->Cell(30,8,'300',1,0,'C');
-$pdf->Cell(40,8,'600',1,1,'C');
 
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(100,8,'Hard Disk',1,0,'L');   //190
-$pdf->Cell(20,8,'2',1,0,'C');
-$pdf->Cell(30,8,'300',1,0,'C');
-$pdf->Cell(40,8,'600',1,1,'C');
 
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(100,8,'Hard Disk',1,0,'L');   //190
-$pdf->Cell(20,8,'2',1,0,'C');
-$pdf->Cell(30,8,'300',1,0,'C');
-$pdf->Cell(40,8,'600',1,1,'C');
-
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(100,8,'Hard Disk',1,0,'L');   //190
-$pdf->Cell(20,8,'2',1,0,'C');
-$pdf->Cell(30,8,'300',1,0,'C');
-$pdf->Cell(40,8,'600',1,1,'C');
 
 
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(100,8,'',0,0,'L');   //190
 $pdf->Cell(20,8,'',0,0,'C');
-$pdf->Cell(30,8,'SubTotal',1,0,'C',true);
-$pdf->Cell(40,8,'600',1,1,'C');
-
+$pdf->Cell(30,8,'SubTotal',1,0,'R',true);
+$pdf->Cell(40,8, 'PHP '.number_format($row->subtotal, 2, '.', ''),1,1,'R');
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(100,8,'',0,0,'L');   //190
 $pdf->Cell(20,8,'',0,0,'C');
 $pdf->Cell(30,8,'Tax',1,0,'C',true);
-$pdf->Cell(40,8,'60',1,1,'C');
+$pdf->Cell(40,8,'PHP '.number_format($row->tax, 2, '.', ''),1,1,'R');
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(100,8,'',0,0,'L');   //190
 $pdf->Cell(20,8,'',0,0,'C');
 $pdf->Cell(30,8,'Discount',1,0,'C',true);
-$pdf->Cell(40,8,'30',1,1,'C');
-
+$pdf->Cell(40,8,'PHP '.number_format($row->discount, 2, '.', ''),1,1,'R');
 $pdf->SetFont('Arial','B',14);
 $pdf->Cell(100,8,'',0,0,'L');   //190
 $pdf->Cell(20,8,'',0,0,'C');
-$pdf->Cell(30,8,'GrandTotal',1,0,'C',true);
-$pdf->Cell(40,8,'$'.'6600',1,1,'C');
+$pdf->Cell(30,8,'Grand Total',1,0,'C',true);
+$pdf->Cell(40,8,'PHP '.number_format($row->total, 2, '.', ''),1,1,'R');
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(100,8,'',0,0,'L');   //190
 $pdf->Cell(20,8,'',0,0,'C');
 $pdf->Cell(30,8,'Paid',1,0,'C',true);
-$pdf->Cell(40,8,'7000',1,1,'C');
+$pdf->Cell(40,8,'PHP '.number_format($row->paid, 2, '.', ''),1,1,'R');
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(100,8,'',0,0,'L');   //190
 $pdf->Cell(20,8,'',0,0,'C');
 $pdf->Cell(30,8,'Due',1,0,'C',true);
-$pdf->Cell(40,8,'400',1,1,'C');
+$pdf->Cell(40,8,'PHP '.number_format($row->due, 2, '.', ''),1,1,'R');
 
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(100,8,'',0,0,'L');   //190
 $pdf->Cell(20,8,'',0,0,'C');
 $pdf->Cell(30,8,'Payment Type',1,0,'C',true);
-$pdf->Cell(40,8,'Cash',1,1,'C');
+$pdf->Cell(40,8,$row->payment_type,1,1,'C');
 
 
 $pdf->Cell(50,10,'',0,1,'');

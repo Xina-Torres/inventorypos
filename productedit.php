@@ -379,12 +379,12 @@ $productimage_db=$row['pimage'];
 
                         <div class="form-group">
                             <label>Purchase price</label>
-                            <input type="number" min="1" step="1" class="form-control" value="<?php echo $purchaseprice_db;?>" name="txtpprice" placeholder="Enter..." required>
+                            <input type="number" min=".1" step=".1" class="form-control" value="<?php echo $purchaseprice_db;?>" name="txtpprice" placeholder="Enter..." required>
                         </div>
 
                         <div class="form-group">
                             <label>Sale price</label>
-                            <input type="number" min="1" step="1" class="form-control" value="<?php echo $saleprice_db; ?>" name="txtsaleprice" placeholder="Enter..." required>
+                            <input type="number" min=".1" step=".1" class="form-control" value="<?php echo $saleprice_db; ?>" name="txtsaleprice" placeholder="Enter..." required>
                         </div>
 
 
@@ -398,7 +398,7 @@ $productimage_db=$row['pimage'];
 
                         <div class="form-group">
                             <label>Stock</label>
-                            <input type="number" min="1" step="1" class="form-control" value="<?php echo $stock_db; ?>" name="txtstock" placeholder="Enter..." required>
+                            <input type="number" min=".1" step=".1" class="form-control" value="<?php echo $stock_db; ?>" name="txtstock" placeholder="Enter..." required>
                         </div>
 
 

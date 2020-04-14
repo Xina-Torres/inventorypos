@@ -267,12 +267,12 @@ swal({
 
                         <div class="form-group">
                             <label>Purchase price</label>
-                            <input type="number" min="1" step="1" class="form-control" name="txtpprice" placeholder="Enter..." required>
+                            <input type="number" min=".1" step=".1" class="form-control" name="txtpprice" placeholder="Enter..." required>
                         </div>
 
                         <div class="form-group">
                             <label>Sale price</label>
-                            <input type="number" min="1" step="1" class="form-control" name="txtsaleprice" placeholder="Enter..." required>
+                            <input type="number" min=".1" step=".1" class="form-control" name="txtsaleprice" placeholder="Enter..." required>
                         </div>
 
 
@@ -286,7 +286,7 @@ swal({
 
                         <div class="form-group">
                             <label>Stock</label>
-                            <input type="number" min="1" step="1" class="form-control" name="txtstock" placeholder="Enter..." required>
+                            <input type="number" min=".1" step=".1" class="form-control" name="txtstock" placeholder="Enter..." required>
                         </div>
 
 

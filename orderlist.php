@@ -98,7 +98,7 @@ while($row=$select->fetch(PDO::FETCH_OBJ)  ){
     
     
     <td>
-<a href="invoice_80mm.php?id='.$row->invoice_id.'" class="btn btn-warning" role="button" target="_blank"><span class="glyphicon glyphicon-print"  style="color:#ffffff" data-toggle="tooltip"  title="Print Invoice"></span></a>   
+<a href="invoice_db.php?id='.$row->invoice_id.'" class="btn btn-warning" role="button" target="_blank"><span class="glyphicon glyphicon-print"  style="color:#ffffff" data-toggle="tooltip"  title="Print Invoice"></span></a>   
     
     </td>
     
