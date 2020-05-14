@@ -30,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
-    <script src="Chart.js-2.8.0/dist/Chart.min.js"></script>
+    <script src="Chart.js-2.9.3/dist/Chart.min.js"></script>
 
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -133,13 +133,16 @@ desired effect
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
+                                <!-- Profile image -->
                                 <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs"><?php echo $_SESSION['username'];?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
+
                                 <li class="user-header">
+                                    <!-- Profile image -->
                                     <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                     <p>
@@ -227,7 +230,8 @@ desired effect
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="tablereport.php"><i class="fa fa-circle-o"></i>Table Report</a></li>
-                            <li><a href="graphreport.php"><i class="fa fa-circle-o"></i>Grpah Report</a></li>
+                            <li><a href="graphreport_profit.php"><i class="fa fa-circle-o"></i>Graph Report - Profit</a></li>
+                            <li><a href="graphreport_sales.php"><i class="fa fa-circle-o"></i>Graph Report - Sales</a></li>
                         </ul>
                     </li>
 

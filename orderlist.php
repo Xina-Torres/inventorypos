@@ -90,15 +90,15 @@ while($row=$select->fetch(PDO::FETCH_OBJ)  ){
     <tr>
     <td>'.$row->invoice_id.'</td>
     <td>'.$row->customer_name.'</td>
-    <td>'.$row->order_date.'</td>
-    <td>'.$row->total.'</td>
-    <td>'.$row->paid.'</td>
-    <td>'.$row->due.'</td>
+    <td>'.date("m-d-Y", strtotime($row->order_date)).'</td>
+    <td>'.number_format($row->total, 2, '.', ', ').'</td>
+    <td>'.number_format($row->paid, 2, '.', ', ').'</td>
+    <td>'.number_format($row->due, 2, '.', ', ').'</td>
     <td>'.$row->payment_type.'</td>
     
     
     <td>
-<a href="invoice_db.php?id='.$row->invoice_id.'" class="btn btn-warning" role="button" target="_blank"><span class="glyphicon glyphicon-print"  style="color:#ffffff" data-toggle="tooltip"  title="Print Invoice"></span></a>   
+<a href="invoice_80mm.php?id='.$row->invoice_id.'" class="btn btn-warning" role="button" target="_blank"><span class="glyphicon glyphicon-print"  style="color:#ffffff" data-toggle="tooltip"  title="Print Invoice"></span></a>   
     
     </td>
     
